@@ -21,6 +21,7 @@ public class FruitSpawner : MonoBehaviour
 
   private float spawnTimer = 0;
   private Collider spawnZone = null;
+  private bool _isActive = true;
   // Start is called before the first frame update
   void Start()
   {
@@ -36,6 +37,9 @@ public class FruitSpawner : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
+    if (!_isActive) 
+      return;
+
     SpawnTimerTick();
   }
 
@@ -115,5 +119,13 @@ public class FruitSpawner : MonoBehaviour
     pos.y = spawnZone.bounds.min.y;
     pos.z = spawnZone.bounds.min.z;
     return pos;
+  }
+
+  public void stopSpawn() { _isActive = false; }
+
+  // Перезапускаем появление фруктов и бомб
+  public void Restart(){
+    _isActive = true;
+    SetNewSpawnTimer();
   }
 }

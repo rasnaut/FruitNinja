@@ -10,6 +10,7 @@ public class FruitBehaviour : MonoBehaviour
   // Приватные переменные для Rigidbody (физических свойств) целого фрукта и коллайдера для разрезания
   private Rigidbody mainRigidbody;
   private Collider sliceTrigger;
+
   // Start is called before the first frame update
   void Start()
   {

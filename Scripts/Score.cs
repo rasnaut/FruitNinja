@@ -30,8 +30,15 @@ public class Score : MonoBehaviour
     SetScoreText(value);  // Вызываем метод SetScoreText() с этим значением
   }
 
-  private void SetScoreText(int value)
-  {
+  private void SetScoreText(int value) {
     _scoreText.text = "Score: " + value; // Отображаем в компоненте _scoreText.text текущие очки
+  }
+
+  public int GetScore() {
+    return _score;  // Получаем итоговый счёт
+  }
+
+  public void Restart() {
+    SetScore(0);  // Обнуляем счётчик очков
   }
 }

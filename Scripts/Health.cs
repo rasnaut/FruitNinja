@@ -27,8 +27,14 @@ public class Health : MonoBehaviour
     SetHealthText(value);
   }
 
+  public int GetCurrentHealth() { return _currentHealth; }
+
   public void SetHealthText(int value)
   {
     _healthText.text = "Health: " + value.ToString();
+  }
+
+  public void Restart() {
+    SetHealth(StartHealth); // Восстанавливаем счётчик жизней
   }
 }
