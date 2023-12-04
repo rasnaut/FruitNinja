@@ -15,10 +15,7 @@ public class Slicer : MonoBehaviour
   private Camera _mainCamera;                  // Основная камера в сцене
   private Vector3 _direction;                  // Направление движения резака
 
-  // Start is called before the first frame update
-  void Start() {
-    Init();
-  }
+  void Start() { Init(); }
 
   private void Init()
   {

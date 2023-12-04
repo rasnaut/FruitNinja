@@ -11,7 +11,6 @@ public class GameEnder : MonoBehaviour
   public TextMeshProUGUI GameEndScoreText; // Надпись с итоговым счётом
   public TextMeshProUGUI BestScoreText;    // Текстовое поле лучшего счёта
 
-  // Start is called before the first frame update
   void Start(){
     SwitchScreens(true); // При запуске игры показываем игровой экран
   }

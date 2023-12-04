@@ -17,10 +17,9 @@ public class Score : MonoBehaviour
     SetScore(0);      // Вызываем метод SetScore() с начальным значением 0
     LoadBestScore();
   }
-  
-  private void FillComponents()
-  {
-    // Находим компонент TextMeshProUGUI у дочерних объектов того объекта, на котором висит скрипт (у нас это будет Score), и присваиваем значение компонента переменной _scoreText
+
+  // Находим компонент TextMeshProUGUI у дочерних объектов того объекта, на котором висит скрипт (у нас это будет Score), и присваиваем значение компонента переменной _scoreText
+  private void FillComponents() {
     _scoreText = GetComponentInChildren<TextMeshProUGUI>();
   }
 
