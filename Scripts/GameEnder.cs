@@ -9,7 +9,8 @@ public class GameEnder : MonoBehaviour
   public GameObject      GameScreen;       // Объект игрового экрана
   public GameObject      GameEndScreen;    // Объект экрана конца игры
   public TextMeshProUGUI GameEndScoreText; // Надпись с итоговым счётом
-  
+  public TextMeshProUGUI BestScoreText;    // Текстовое поле лучшего счёта
+
   // Start is called before the first frame update
   void Start(){
     SwitchScreens(true); // При запуске игры показываем игровой экран
@@ -18,8 +19,8 @@ public class GameEnder : MonoBehaviour
   public void EndGame()
   {
     FruitSpawner.stopSpawn();               // Прекращаем появление фруктов и бомб
-    SetGameEndScoreText(Score.GetScore());  // Получаем и устанавливаем итоговый счёт
     SwitchScreens(false);                   // Переключаемся на экран конца игры
+    RefreshScores();
   }
 
   public void RestartGame()
@@ -39,4 +40,35 @@ public class GameEnder : MonoBehaviour
   private void SetGameEndScoreText(int value) {
     GameEndScoreText.text = $"Your score {value} points!"; // Отображаем в GameEndScoreText.text итоговые очки
   }
+
+  private void RefreshScores()
+  {
+    int score        = Score.GetScore();      // Получаем текущий и лучший счёт из скрипта Score
+    int oldBestScore = Score.GetBestScore();
+
+    bool isNewBestScore = CheckNewBestScore(score, oldBestScore); // Проверяем, верно ли, что текущий счёт — новый рекорд
+
+    SetActiveGameEndScoreText(!isNewBestScore); // Решаем, объявлять ли новый рекорд, в зависимости от значения isNewBestScore
+
+    // Если текущий счёт — новый рекорд
+    if (isNewBestScore) {
+      Score.SetBestScore(score);         // Сохраняем новый рекорд
+      SetNewBestScoreText(score);        // Устанавливаем текстовое поле нового рекорда
+    } else { 
+      SetGameEndScoreText(score);        // Устанавливаем текстовое поле счёта в конце игры
+      SetOldBestScoreText(oldBestScore); // Устанавливаем текстовое поле лучшего счёта
+    }
+  }
+
+  // Возвращаем результат проверки того, что текущий счёт выше лучшего (true или false)
+  private bool CheckNewBestScore(int score, int oldBestScore) { return score > oldBestScore; }
+
+  // Обновляем надпись лучшего счёта
+  private void SetOldBestScoreText(int value) { BestScoreText.text = $"Лучший результат: {value}"; }
+
+  // Обновляем надпись нового рекорда
+  private void SetNewBestScoreText(int value) { BestScoreText.text = $"Новый рекорд: {value}!"; }
+
+  // Устанавливаем активность текстового поля счёта в конце игры в зависимости от значения value
+  private void SetActiveGameEndScoreText(bool value) { GameEndScoreText.gameObject.SetActive(value); }
 }
